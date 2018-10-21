@@ -21,7 +21,9 @@ router.post('/' , (req,res) => {
    newDriver.save()
    .then( () => {
        res.send("Driver Saved To Database")
-   }).catch( (err) => {
+   })
+   // Error Handling 
+   .catch( (err) => {
        console.log(err.message)
        res.status(422).send({
            err : err.message})
@@ -34,18 +36,55 @@ router.put('/:id' , (req,res) => {
 
     console.log(req.params.id)
 
+Driver.findByIdAndUpdate({ _id: req.params.id}, req.body)
+.then( (driver) => {
+    console.log("Driver Found" , driver)
+    if(driver){
+            driver.name = req.body.name,
+            driver.car = req.body.car
+        
+            res.status(200).send({
+                Message : "Driver Updated",
+                Driver : driver
+            })
+        }
+           
+    else{
+            res.send({
+                Message : "Driver Does Not Exist in Database"
+            })
+        }
+})
+.catch( err => {
     res.send({
-        name: "Rohito Updates"
+        Error : err.message
     })
 })
 
-router.delete('/:id' , (req,res) => {
+    
+})
 
-    console.log(req.params.id)
+router.delete('/:id' , (req,res,next) => {
 
-    res.send({
-        name: "Rohito Deletes"
-    })
+    Driver.findOneAndDelete({ _id : req.params.id})
+    .then( (driver) => {
+        if(driver) {
+            res.send({
+                Driver_Deleted: driver
+            })
+        }
+        else {
+            res.send({
+                Message : "Driver Does Not Exist"
+            })
+        }
+        
+    }).catch( err => {
+        res.send("Error Handler",  err.message)
+    })    
+    // res.send({
+    //     name: "Rohito Deletes"
+    // })
 })
 
 
