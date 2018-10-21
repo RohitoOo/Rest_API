@@ -41,7 +41,7 @@ function displayTemp(F,C){
     $('#currentTemp').prepend('<img src='+ +'>');
   }
    $.getJSON('https://freegeoip.net/json/').done(function(location){
-    //console.log(location); works
+    console.log(location); works
 $('#country').html(location.country_name);
 $('#city').html(location.city);
 $('#latitude').html(location.latitude);
@@ -55,7 +55,7 @@ $('#country_name').html(location.country_name);
    $.getJSON(weaApi,function(data){
        apiData=data;
        render(apiData,C);
-    //   console.log(apiData); // works
+      console.log(apiData); // works
        $('#toggle').click(function(){
          C=!C
          render(data,C);
@@ -67,7 +67,7 @@ $('#country_name').html(location.country_name);
      backgroundId.push(id);
      bgIndex=backgroundId.sort().indexOf(id);
 
-    // console.log(backgroundId);
+    console.log(backgroundId);
      $('body').css('background-image','url('+backgroundImg[bgIndex]+')');
    });
                });
