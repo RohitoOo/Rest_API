@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 
 
 mongoose
-.connect('mongodb://localhost/uber')
+.connect('mongodb://localhost/uber', { useNewUrlParser: true } )
 .then( () => {
     console.log("We Are Connected To The Local Database")
 })

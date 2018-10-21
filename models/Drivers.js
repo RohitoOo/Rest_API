@@ -13,7 +13,7 @@ const DriverSchema = new Schema({
     },
     available : {
         type: Boolean,
-        required: [true, "Availability Field Is Required"]
+        default: false
     }
     // Add Geo Location
 

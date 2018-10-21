@@ -15,13 +15,16 @@ router.get('/' , (req,res) => {
 router.post('/' , (req,res) => {
 
     const newDriver = new Driver({
-        name: "Driver 1",
-        car: "Honda",
-        available: true
-    })
+        name: req.body.name,
+        car: req.body.car
+        })
    newDriver.save()
    .then( () => {
        res.send("Driver Saved To Database")
+   }).catch( (err) => {
+       console.log(err.message)
+       res.status(422).send({
+           err : err.message})
    })
 
 
