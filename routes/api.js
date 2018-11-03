@@ -14,10 +14,15 @@ router.get('/' , (req,res) => {
 
 router.post('/' , (req,res) => {
 
+    console.log(req.body.geometry)
+
     const newDriver = new Driver({
         name: req.body.name,
-        car: req.body.car
+        car: req.body.car,
+        geometry: req.body.geometry
         })
+
+        // console.log(newDriver)
    newDriver.save()
    .then( () => {
        res.send("Driver Saved To Database")

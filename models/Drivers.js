@@ -2,6 +2,20 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
+
+// Creat Geo Location Schema 
+
+const GeoLocationSchema = new Schema({
+    type: {
+        type: String,
+        default: "Point"
+    },
+    coordinates: {
+        type: [Number],
+        index: "2dsphere"
+    }
+});
+
 const DriverSchema = new Schema({
     name : {
         type: String,
@@ -14,8 +28,17 @@ const DriverSchema = new Schema({
     available : {
         type: Boolean,
         default: false
+    },
+    geometry: {
+        geometry: {type: {
+            type: String,
+            default: "Point"
+        },
+        coordinates: {
+            type: [Number],
+            index: "2dsphere"
+        }}
     }
-    // Add Geo Location
 
 }) 
 
